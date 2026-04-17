@@ -1,0 +1,105 @@
+media:
+  input: public/uploads
+  output: /uploads
+
+content:
+  - name: posts
+    label: Posts
+    type: collection
+    path: src/content/posts
+    view:
+      fields: [title, date, font, draft]
+      primary: title
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    filename: '{primary}.md'
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+        default: '{currentDate}'
+      - name: font
+        label: Font
+        description: Serif for essays, sans for technical notes.
+        type: select
+        required: true
+        options:
+          creatable: false
+          multiple: false
+          values: [serif, sans]
+        default: serif
+      - name: description
+        label: Description
+        description: Short blurb used in RSS and meta tags.
+        type: string
+      - name: draft
+        label: Draft
+        description: If checked, hidden from production build.
+        type: boolean
+        default: false
+      - name: body
+        label: Body
+        type: text
+        options:
+          format: markdown
+        required: true
+
+  - name: about
+    label: About page
+    type: file
+    path: src/content/pages/about.md
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: body
+        label: Body
+        type: text
+        options:
+          format: markdown
+        required: true
+
+  - name: settings
+    label: Site settings
+    type: file
+    path: src/data/site.json
+    format: json
+    fields:
+      - name: title
+        label: Site title
+        description: Shown in browser tab, RSS feed, and meta tags.
+        type: string
+        required: true
+      - name: description
+        label: Site description
+        description: Default meta description and RSS channel description.
+        type: string
+        required: true
+      - name: author
+        label: Author name
+        type: string
+        required: true
+      - name: author_email
+        label: Contact email
+        type: string
+        required: true
+      - name: home_heading
+        label: Home heading
+        description: Large heading at the top of the home page.
+        type: string
+        required: true
+      - name: home_bio
+        label: Home bio paragraph
+        description: One-paragraph bio shown below the heading on the home page.
+        type: text
+        required: true

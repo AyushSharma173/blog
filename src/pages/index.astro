@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import { SITE_TITLE } from "../consts";
+import { SITE_TITLE, HOME_HEADING, HOME_BIO } from "../consts";
 
 const allPosts = await getCollection("posts", ({ data }) =>
   import.meta.env.DEV || !data.draft
@@ -24,11 +24,8 @@ const fmtMonthDay = (d: Date) =>
 ---
 <BaseLayout title={SITE_TITLE} bodyClass="font-serif">
   <header class="intro">
-    <h1>Ayush Sharma</h1>
-    <p>
-      Engineer and researcher. I write about systems, ideas, and what
-      I'm learning.
-    </p>
+    <h1>{HOME_HEADING}</h1>
+    <p>{HOME_BIO}</p>
     <p><a href="/about/">About →</a></p>
   </header>
 

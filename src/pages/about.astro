@@ -1,19 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { AUTHOR_EMAIL } from "../consts";
+import { getEntry } from "astro:content";
+import { SITE_TITLE } from "../consts";
+
+const about = await getEntry("pages", "about");
+if (!about) throw new Error("about page entry missing (src/content/pages/about.md)");
+const { Content } = await about.render();
 ---
-<BaseLayout title="About — Ayush Sharma" bodyClass="font-serif">
+<BaseLayout title={`${about.data.title} — ${SITE_TITLE}`} bodyClass="font-serif">
   <article>
     <header>
-      <h1>About</h1>
+      <h1>{about.data.title}</h1>
     </header>
-    <p>
-      Ayush Sharma. Engineer and researcher. This is my blog — a place
-      to think out loud about systems, ideas, and what I'm learning.
-    </p>
-    <p>
-      Reach me at <a href={`mailto:${AUTHOR_EMAIL}`}>{AUTHOR_EMAIL}</a>.
-    </p>
+    <Content />
     <footer class="post-footer">
       <a href="/">← home</a>
     </footer>
