@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { SITE_TITLE } from "../consts";
+
+const allPosts = await getCollection("posts", ({ data }) =>
+  import.meta.env.DEV || !data.draft
+);
+
+const posts = allPosts.sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const byYear = new Map<number, typeof posts>();
+for (const post of posts) {
+  const year = post.data.date.getFullYear();
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(post);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+
+const fmtMonthDay = (d: Date) =>
+  d.toLocaleDateString("en-US", { month: "short", day: "2-digit" });
+---
+<BaseLayout title={SITE_TITLE} bodyClass="font-serif">
+  <header class="intro">
+    <h1>Ayush Sharma</h1>
+    <p>
+      Engineer and researcher. I write about systems, ideas, and what
+      I'm learning.
+    </p>
+    <p><a href="/about/">About →</a></p>
+  </header>
+
+  <section class="writing">
+    <h2>Writing</h2>
+    {years.map((year) => (
+      <div>
+        <h3>{year}</h3>
+        <ul class="post-list">
+          {byYear.get(year)!.map((post) => (
+            <li>
+              <time datetime={post.data.date.toISOString().split("T")[0]}>
+                {fmtMonthDay(post.data.date)}
+              </time>
+              <a href={`/writing/${post.slug}/`}>{post.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+</BaseLayout>

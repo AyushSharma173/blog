@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { AUTHOR_EMAIL } from "../consts";
+---
+<BaseLayout title="About — Ayush Sharma" bodyClass="font-serif">
+  <article>
+    <header>
+      <h1>About</h1>
+    </header>
+    <p>
+      Ayush Sharma. Engineer and researcher. This is my blog — a place
+      to think out loud about systems, ideas, and what I'm learning.
+    </p>
+    <p>
+      Reach me at <a href={`mailto:${AUTHOR_EMAIL}`}>{AUTHOR_EMAIL}</a>.
+    </p>
+    <footer class="post-footer">
+      <a href="/">← home</a>
+    </footer>
+  </article>
+</BaseLayout>

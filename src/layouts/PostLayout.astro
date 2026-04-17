@@ -1,0 +1,37 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { SITE_TITLE } from "../consts";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    date: Date;
+    font: "serif" | "sans";
+    description?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const formattedDate = frontmatter.date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const isoDate = frontmatter.date.toISOString().split("T")[0];
+---
+<BaseLayout
+  title={`${frontmatter.title} — ${SITE_TITLE}`}
+  description={frontmatter.description}
+  bodyClass={`font-${frontmatter.font}`}
+>
+  <article>
+    <header>
+      <h1>{frontmatter.title}</h1>
+      <time datetime={isoDate}>{formattedDate}</time>
+    </header>
+    <slot />
+    <footer class="post-footer">
+      <a href="/">← home</a>
+    </footer>
+  </article>
+</BaseLayout>
