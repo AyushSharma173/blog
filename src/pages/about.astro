@@ -7,7 +7,10 @@ const about = await getEntry("pages", "about");
 if (!about) throw new Error("about page entry missing (src/content/pages/about.md)");
 const { Content } = await about.render();
 ---
-<BaseLayout title={`${about.data.title} — ${SITE_TITLE}`} bodyClass="font-serif">
+<BaseLayout
+  title={`${about.data.title} — ${SITE_TITLE}`}
+  bodyClass={`font-${about.data.font}`}
+>
   <article>
     <header>
       <h1>{about.data.title}</h1>

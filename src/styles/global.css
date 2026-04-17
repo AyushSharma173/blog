@@ -60,6 +60,10 @@ body {
 body.font-serif { font-family: var(--font-serif); }
 body.font-sans  { font-family: var(--font-sans); font-size: 17px; line-height: 1.55; }
 
+.font-serif { font-family: var(--font-serif); }
+.font-sans  { font-family: var(--font-sans); }
+.font-mono  { font-family: var(--font-mono); }
+
 main, article, .intro, .writing {
   max-width: var(--measure);
   margin: 0 auto;

@@ -1,5 +1,6 @@
 ---
 title: About
+font: serif
 ---
 
 Ayush Sharma. Engineer and researcher. This is my blog — a place to

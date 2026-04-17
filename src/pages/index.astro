@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import { SITE_TITLE, HOME_HEADING, HOME_BIO } from "../consts";
+import { SITE_TITLE, HOME_HEADING, HOME_BIO, HOME_FONT, HOME_BIO_FONT } from "../consts";
 
 const allPosts = await getCollection("posts", ({ data }) =>
   import.meta.env.DEV || !data.draft
@@ -22,10 +22,10 @@ const years = [...byYear.keys()].sort((a, b) => b - a);
 const fmtMonthDay = (d: Date) =>
   d.toLocaleDateString("en-US", { month: "short", day: "2-digit" });
 ---
-<BaseLayout title={SITE_TITLE} bodyClass="font-serif">
+<BaseLayout title={SITE_TITLE} bodyClass={`font-${HOME_FONT}`}>
   <header class="intro">
     <h1>{HOME_HEADING}</h1>
-    <p>{HOME_BIO}</p>
+    <p class={`font-${HOME_BIO_FONT}`}>{HOME_BIO}</p>
     <p><a href="/about/">About →</a></p>
   </header>
 

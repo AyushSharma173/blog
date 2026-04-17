@@ -62,6 +62,16 @@ content:
         label: Title
         type: string
         required: true
+      - name: font
+        label: Font
+        description: Serif or sans for the About page body.
+        type: select
+        required: true
+        options:
+          creatable: false
+          multiple: false
+          values: [serif, sans]
+        default: serif
       - name: body
         label: Body
         type: text
@@ -103,3 +113,23 @@ content:
         description: One-paragraph bio shown below the heading on the home page.
         type: text
         required: true
+      - name: home_font
+        label: Home page font
+        description: Overall font for the home page (heading + writing list).
+        type: select
+        required: true
+        options:
+          creatable: false
+          multiple: false
+          values: [serif, sans]
+        default: serif
+      - name: home_bio_font
+        label: Home bio paragraph font
+        description: Font just for the bio paragraph — can differ from the page font.
+        type: select
+        required: true
+        options:
+          creatable: false
+          multiple: false
+          values: [serif, sans]
+        default: serif

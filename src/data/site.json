@@ -4,5 +4,7 @@
   "author": "Ayush Sharma",
   "author_email": "ayush.psr@gmail.com",
   "home_heading": "Ayush Sharma",
-  "home_bio": "Engineer and researcher. I write about systems, ideas, and what I'm learning."
+  "home_bio": "Engineer and researcher. I write about systems, ideas, and what I'm learning.",
+  "home_font": "serif",
+  "home_bio_font": "serif"
 }
