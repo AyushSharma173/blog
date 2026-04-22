@@ -110,7 +110,7 @@ content:
         required: true
       - name: home_bio
         label: Home bio paragraph
-        description: One-paragraph bio shown below the heading on the home page.
+        description: "Shown below the heading. Markdown is rendered: *italic*, **bold**, [links](url), newlines become line breaks, double newlines become paragraph breaks."
         type: text
         required: true
       - name: home_font
@@ -124,8 +124,8 @@ content:
           values: [serif, sans]
         default: serif
       - name: home_bio_font
-        label: Home bio paragraph font
-        description: Font just for the bio paragraph — can differ from the page font.
+        label: Home bio font family
+        description: Font family just for the bio paragraph.
         type: select
         required: true
         options:
@@ -133,3 +133,38 @@ content:
           multiple: false
           values: [serif, sans]
         default: serif
+      - name: home_bio_size
+        label: Home bio size
+        description: Overall size of the bio text.
+        type: select
+        required: true
+        options:
+          creatable: false
+          multiple: false
+          values: [text-xs, text-sm, text-base, text-lg, text-xl, text-2xl, text-3xl]
+        default: text-base
+      - name: home_bio_italic
+        label: Home bio italic
+        description: Render the whole bio in italic. (You can also do inline italics via *asterisks* in the bio text itself.)
+        type: boolean
+        default: false
+      - name: home_bio_weight
+        label: Home bio weight
+        description: Normal or semibold. Use **double asterisks** in the bio for inline bold instead if you only want parts bolded.
+        type: select
+        required: true
+        options:
+          creatable: false
+          multiple: false
+          values: [normal, semibold]
+        default: normal
+      - name: home_bio_align
+        label: Home bio alignment
+        description: Horizontal alignment of the bio paragraph.
+        type: select
+        required: true
+        options:
+          creatable: false
+          multiple: false
+          values: [left, center, right]
+        default: left

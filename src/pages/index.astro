@@ -1,7 +1,23 @@
 ---
+import { marked } from "marked";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import { SITE_TITLE, HOME_HEADING, HOME_BIO, HOME_FONT, HOME_BIO_FONT } from "../consts";
+import {
+  SITE_TITLE, HOME_HEADING, HOME_BIO,
+  HOME_FONT, HOME_BIO_FONT,
+  HOME_BIO_SIZE, HOME_BIO_ITALIC, HOME_BIO_WEIGHT, HOME_BIO_ALIGN,
+} from "../consts";
+
+const bioHtml = marked.parse(HOME_BIO, { gfm: true, breaks: true, async: false }) as string;
+
+const bioClasses = [
+  "intro-bio",
+  `font-${HOME_BIO_FONT}`,
+  HOME_BIO_SIZE,
+  HOME_BIO_ITALIC ? "italic" : "",
+  HOME_BIO_WEIGHT === "semibold" ? "font-semibold" : "",
+  HOME_BIO_ALIGN !== "left" ? `text-${HOME_BIO_ALIGN}` : "",
+].filter(Boolean).join(" ");
 
 const allPosts = await getCollection("posts", ({ data }) =>
   import.meta.env.DEV || !data.draft
@@ -25,7 +41,7 @@ const fmtMonthDay = (d: Date) =>
 <BaseLayout title={SITE_TITLE} bodyClass={`font-${HOME_FONT}`}>
   <header class="intro">
     <h1>{HOME_HEADING}</h1>
-    <p class={`font-${HOME_BIO_FONT}`}>{HOME_BIO}</p>
+    <div class={bioClasses} set:html={bioHtml}></div>
     <p><a href="/about/">About →</a></p>
   </header>
 
